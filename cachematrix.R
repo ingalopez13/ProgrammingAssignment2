@@ -6,10 +6,16 @@
 makeCacheMatrix <- function(mat=matrix())
 {
         inv <- NULL
+        
+        
+         ##this function have 4 funtions to set, get the matrix, in addition to set
+         ## and get the inverse of the matrix.
+        
         set <- function(nmat) {
                 mat <<- nmat
                 inv <<- NULL
         }
+        
         get <- function() mat
        
         setinv <- function(inverted) inv <<- inverted
@@ -35,11 +41,13 @@ cacheSolve <- function(mat, ...)
         
         inv <- mat$getinv()
         
+        ##verify if there is a cache of the inverse
         if(!is.null(inv)) {
                 message("getting cached data")
                 return(inv)
         }
         
+        ##Calculate the cache and pass it to be stored.
         data <- mat$get()
         inv <- solve(data)
         mat$setinv(inv)

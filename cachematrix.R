@@ -1,15 +1,48 @@
-## Put comments here that give an overall description of what your
+## This is the the Rprograming assignment 2 including both functions
 ## functions do
 
-## Write a short comment describing this function
+## this first function creates a matrix and stores its  cache
 
-makeCacheMatrix <- function(x = matrix()) {
-
+makeCacheMatrix <- function(mat=matrix())
+{
+        inv <- NULL
+        set <- function(nmat) {
+                mat <<- nmat
+                inv <<- NULL
+        }
+        get <- function() mat
+       
+        setinv <- function(inverted) inv <<- inverted
+        
+        getinv <- function() inv
+       
+        ## list the values
+        
+        list(set = set, 
+             get = get,
+             setinv = setinv,
+             getinv = getinv)
+        
 }
 
 
-## Write a short comment describing this function
+## this functions calculates the inverse of the matrix if it has not yet been calculated
+## if it was calculated it returns the cached data.
 
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+
+cacheSolve <- function(mat, ...)
+{
+        
+        inv <- mat$getinv()
+        
+        if(!is.null(inv)) {
+                message("getting cached data")
+                return(inv)
+        }
+        
+        data <- mat$get()
+        inv <- solve(data)
+        mat$setinv(inv)
+        inv
+        
 }
